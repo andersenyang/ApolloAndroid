@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/andersenyang/projects/QuickStartApp/app/libs/huesdkresources.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="7183fbb86900448556ef87d3af0db01a77c27a09">
+        <dex dex="/Users/andersenyang/projects/QuickStartApp/app/build/intermediates/pre-dexed/debug/huesdkresources_5256897e676cc54bf349eb4230ebcb0858a25d6b.jar" />
+    </item>
+    <item
+        jar="/Users/andersenyang/projects/QuickStartApp/app/libs/huelocalsdk.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="07362e192094e402e032db4407c86e36080340ab">
+        <dex dex="/Users/andersenyang/projects/QuickStartApp/app/build/intermediates/pre-dexed/debug/huelocalsdk_95ac90338d560994b1a21c6985e8877f81eb7a4b.jar" />
+    </item>
+
+</items>
