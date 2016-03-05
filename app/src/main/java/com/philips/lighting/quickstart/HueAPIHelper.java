@@ -3,9 +3,7 @@ package com.philips.lighting.quickstart;
 import java.util.List;
 import java.util.Random;
 
-import android.app.Service;
-import android.content.Intent;
-import android.os.IBinder;
+import android.util.Log;
 
 import com.philips.lighting.hue.sdk.PHHueSDK;
 import com.philips.lighting.model.PHBridge;
@@ -13,36 +11,16 @@ import com.philips.lighting.model.PHBridgeResourcesCache;
 import com.philips.lighting.model.PHLight;
 import com.philips.lighting.model.PHLightState;
 
-public class HueService extends Service{
+public class HueAPIHelper {
     private PHHueSDK phHueSDK;
     private static final int MAX_HUE=65535;
-    private static final int HUE_LEVELS=10;
+    private static final int HUE_LEVELS=15;
     private static final int MAX_BRIGHTNESS=254;
-    private static final int BRIGHTNESS_LEVELS=10;
+    private static final int BRIGHTNESS_LEVELS=6;
 
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
+    public HueAPIHelper() {
+        phHueSDK = phHueSDK.create();
     }
-
-    @Override
-    public void onCreate() {
-        phHueSDK = PHHueSDK.getInstance();
-    }
-
-    @Override
-    public void onDestroy() {
-        PHBridge bridge = phHueSDK.getSelectedBridge();
-        if (bridge != null) {
-            if (phHueSDK.isHeartbeatEnabled(bridge)) {
-                phHueSDK.disableHeartbeat(bridge);
-            }
-        }
-
-        phHueSDK.disconnect(bridge);
-        super.onDestroy();
-    }
-
 
     public void changeLightColour() {
         PHBridge bridge = phHueSDK.getSelectedBridge();
@@ -53,6 +31,7 @@ public class HueService extends Service{
 
         for(PHLight light : lights) {
             PHLightState lightState = light.getLastKnownLightState();
+            PHLightState lightStateNew = new PHLightState();
 
             int hue = lightState.getHue();
             hue = hue + MAX_HUE/HUE_LEVELS;
@@ -61,19 +40,19 @@ public class HueService extends Service{
                 hue = hue - MAX_HUE;
             }
 
-            lightState.setHue(hue);
-            bridge.updateLightState(light, lightState);
+            lightStateNew.setHue(hue);
+            lightStateNew.setSaturation(200);
+            bridge.updateLightState(light, lightStateNew);
         }
     }
 
     public void changeBrightness(boolean brighter) {
         PHBridge bridge = phHueSDK.getSelectedBridge();
-        PHBridgeResourcesCache cache = bridge.getResourceCache();
-
-        List<PHLight> lights = cache.getAllLights();
+        List<PHLight> lights = bridge.getResourceCache().getAllLights();
 
         for (PHLight light: lights){
             PHLightState lightState = light.getLastKnownLightState();
+            PHLightState lightStateNew = new PHLightState();
             int brightness = lightState.getBrightness();
 
             if (brighter) {
@@ -88,10 +67,20 @@ public class HueService extends Service{
                 }
             }
 
-            lightState.setBrightness(brightness);
-            bridge.updateLightState(light, lightState);
+            lightStateNew.setBrightness(brightness);
+            bridge.updateLightState(light, lightStateNew);
         }
-
     }
 
+    public void close() {
+        PHBridge bridge = phHueSDK.getSelectedBridge();
+        if (bridge != null) {
+
+            if (phHueSDK.isHeartbeatEnabled(bridge)) {
+                phHueSDK.disableHeartbeat(bridge);
+            }
+
+            phHueSDK.disconnect(bridge);
+        }
+    }
 }

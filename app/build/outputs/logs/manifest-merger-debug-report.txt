@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/andersenyang/projects/QuickStartApp/app/src/main/AndroidManifest.xml:2:1-39:12
+ADDED from /Users/andersenyang/projects/QuickStartApp/app/src/main/AndroidManifest.xml:2:1-38:12
 	package
 		ADDED from /Users/andersenyang/projects/QuickStartApp/app/src/main/AndroidManifest.xml:3:5-46
 		INJECTED from /Users/andersenyang/projects/QuickStartApp/app/src/main/AndroidManifest.xml
@@ -30,7 +30,7 @@ ADDED from /Users/andersenyang/projects/QuickStartApp/app/src/main/AndroidManife
 	android:name
 		ADDED from /Users/andersenyang/projects/QuickStartApp/app/src/main/AndroidManifest.xml:11:22-64
 application
-ADDED from /Users/andersenyang/projects/QuickStartApp/app/src/main/AndroidManifest.xml:14:5-38:19
+ADDED from /Users/andersenyang/projects/QuickStartApp/app/src/main/AndroidManifest.xml:14:5-37:19
 	android:label
 		ADDED from /Users/andersenyang/projects/QuickStartApp/app/src/main/AndroidManifest.xml:17:9-41
 	android:allowBackup

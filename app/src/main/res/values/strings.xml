@@ -28,4 +28,6 @@
     <string name="txt_select_smartbridge">Please select a bridge to use for this app</string>
     <string name="title_error">Error</string>
     <string name="txt_last_heartbeat">Last Heartbeat : </string>
+    <string name="btn_hue">Change Colour</string>
+    <string name="btn_brightness">Change Brightness</string>
 </resources>

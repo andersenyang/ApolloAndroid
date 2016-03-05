@@ -33,7 +33,6 @@
 	    <activity
 	         android:name="com.philips.lighting.quickstart.PHPushlinkActivity"
 	         android:label="@string/app_name" >
-	     </activity>        
-        
+	     </activity>
     </application>
 </manifest>

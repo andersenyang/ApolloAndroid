@@ -18,6 +18,7 @@ import com.philips.lighting.model.PHBridgeResource;
 import com.philips.lighting.model.PHHueError;
 import com.philips.lighting.model.PHLight;
 import com.philips.lighting.model.PHLightState;
+import com.philips.lighting.quickstart.HueAPIHelper;
 
 /**
  * MyApplicationActivity - The starting point for creating your own Hue App.  
@@ -27,8 +28,9 @@ import com.philips.lighting.model.PHLightState;
  *
  */
 public class MyApplicationActivity extends Activity {
-    private PHHueSDK phHueSDK;
-    private static final int MAX_HUE=65535;
+//    private PHHueSDK phHueSDK;
+//    private static final int MAX_HUE=65535;
+    private HueAPIHelper hueHelper;
     public static final String TAG = "QuickStart";
     
     @Override
@@ -36,35 +38,49 @@ public class MyApplicationActivity extends Activity {
         super.onCreate(savedInstanceState);
         setTitle(R.string.app_name);
         setContentView(R.layout.activity_main);
-        phHueSDK = PHHueSDK.create();
-        Button randomButton;
-        randomButton = (Button) findViewById(R.id.buttonRand);
-        randomButton.setOnClickListener(new OnClickListener() {
+//        phHueSDK = PHHueSDK.create();
+        hueHelper = new HueAPIHelper();
+
+        Button hueButton, brightnessButton;
+        hueButton = (Button) findViewById(R.id.hueButton);
+        hueButton.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                randomLights();
+                hueHelper.changeLightColour();
             }
 
         });
 
+        brightnessButton = (Button) findViewById(R.id.brightnessButton);
+        brightnessButton.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                hueHelper.changeBrightness(true);
+            }
+
+        });
+
+
+
     }
 
-    public void randomLights() {
-        PHBridge bridge = phHueSDK.getSelectedBridge();
-
-        List<PHLight> allLights = bridge.getResourceCache().getAllLights();
-        Random rand = new Random();
-        
-        for (PHLight light : allLights) {
-            PHLightState lightState = new PHLightState();
-            lightState.setHue(rand.nextInt(MAX_HUE));
-            // To validate your lightstate is valid (before sending to the bridge) you can use:  
-            // String validState = lightState.validateState();
-            bridge.updateLightState(light, lightState, listener);
-            //  bridge.updateLightState(light, lightState);   // If no bridge response is required then use this simpler form.
-        }
-    }
+//    public void randomLights() {
+//        PHBridge bridge = phHueSDK.getSelectedBridge();
+//
+//        List<PHLight> allLights = bridge.getResourceCache().getAllLights();
+//        Random rand = new Random();
+//
+//        for (PHLight light : allLights) {
+//            PHLightState lightState = new PHLightState();
+//            lightState.setHue(rand.nextInt(MAX_HUE));
+//            // To validate your lightstate is valid (before sending to the bridge) you can use:
+//            // String validState = lightState.validateState();
+//            bridge.updateLightState(light, lightState, listener);
+//            //  bridge.updateLightState(light, lightState);   // If no bridge response is required then use this simpler form.
+//        }
+//    }
     // If you want to handle the response from the bridge, create a PHLightListener object.
     PHLightListener listener = new PHLightListener() {
         
@@ -92,15 +108,7 @@ public class MyApplicationActivity extends Activity {
     
     @Override
     protected void onDestroy() {
-        PHBridge bridge = phHueSDK.getSelectedBridge();
-        if (bridge != null) {
-            
-            if (phHueSDK.isHeartbeatEnabled(bridge)) {
-                phHueSDK.disableHeartbeat(bridge);
-            }
-            
-            phHueSDK.disconnect(bridge);
-            super.onDestroy();
-        }
+        hueHelper.close();
+        super.onDestroy();
     }
 }
