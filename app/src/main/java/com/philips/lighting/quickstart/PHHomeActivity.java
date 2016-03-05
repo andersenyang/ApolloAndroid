@@ -3,9 +3,15 @@ package com.philips.lighting.quickstart;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +19,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.philips.lighting.data.AccessPointListAdapter;
 import com.philips.lighting.data.HueSharedPreferences;
@@ -46,6 +53,9 @@ public class PHHomeActivity extends Activity implements OnItemClickListener {
     private AccessPointListAdapter adapter;
     
     private boolean lastSearchWasIPScan = false;
+
+    private BLEService mService;
+    private TextView textView;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +97,14 @@ public class PHHomeActivity extends Activity implements OnItemClickListener {
         else {  // First time use, so perform a bridge search.
             doBridgeSearch();
         }
+
+        //textView = (TextView) findViewById(R.id.sample);
+
+        Log.d("Imperium", "onCreate");
+        Intent gattServiceIntent = new Intent(this, BLEService.class);
+        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+
+        registerReceiver(gestureUpdated, new IntentFilter("NEW_GESTURE"));
     }
 
     @Override
@@ -237,7 +255,34 @@ public class PHHomeActivity extends Activity implements OnItemClickListener {
         return true;
     }
 
-    
+    private final ServiceConnection mServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder service) {
+            Log.d("Imperium", "onServiceConnected");
+            mService = ((BLEService.LocalBinder) service).getService();
+            if (!mService.initialize()) {
+                finish();
+            }
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            mService = null;
+        }
+
+    };
+
+    private BroadcastReceiver gestureUpdated= new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            //textView.setText(intent.getExtras().getString("Key"));
+
+        }
+    };
+
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -245,6 +290,9 @@ public class PHHomeActivity extends Activity implements OnItemClickListener {
             phHueSDK.getNotificationManager().unregisterSDKListener(listener);
         }
         phHueSDK.disableAllHeartbeat();
+
+        unbindService(mServiceConnection);
+        mService = null;
     }
         
     @Override

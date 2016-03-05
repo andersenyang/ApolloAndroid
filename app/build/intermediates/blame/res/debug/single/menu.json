@@ -4,6 +4,14 @@
         "source": "/Users/andersenyang/projects/QuickStartApp/app/src/main/res/menu/bridgelist.xml"
     },
     {
+        "merged": "/Users/supreet/GitHub/ApolloAndroid/app/build/intermediates/res/merged/debug/menu/home.xml",
+        "source": "/Users/supreet/GitHub/ApolloAndroid/app/src/main/res/menu/home.xml"
+    },
+    {
+        "merged": "/Users/supreet/GitHub/ApolloAndroid/app/build/intermediates/res/merged/debug/menu/bridgelist.xml",
+        "source": "/Users/supreet/GitHub/ApolloAndroid/app/src/main/res/menu/bridgelist.xml"
+    },
+    {
         "merged": "/Users/andersenyang/projects/QuickStartApp/app/build/intermediates/res/merged/debug/menu/home.xml",
         "source": "/Users/andersenyang/projects/QuickStartApp/app/src/main/res/menu/home.xml"
     }

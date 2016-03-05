@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/Users/supreet/GitHub/ApolloAndroid/app/build/intermediates/res/merged/debug/layout/activity_main.xml",
+        "source": "/Users/supreet/GitHub/ApolloAndroid/app/src/main/res/layout/activity_main.xml"
+    },
+    {
         "merged": "/Users/andersenyang/projects/QuickStartApp/app/build/intermediates/res/merged/debug/layout/selectbridge_item.xml",
         "source": "/Users/andersenyang/projects/QuickStartApp/app/src/main/res/layout/selectbridge_item.xml"
     },
@@ -12,11 +16,27 @@
         "source": "/Users/andersenyang/projects/QuickStartApp/app/src/main/res/layout/activity_main.xml"
     },
     {
+        "merged": "/Users/supreet/GitHub/ApolloAndroid/app/build/intermediates/res/merged/debug/layout/home.xml",
+        "source": "/Users/supreet/GitHub/ApolloAndroid/app/src/main/res/layout/home.xml"
+    },
+    {
+        "merged": "/Users/supreet/GitHub/ApolloAndroid/app/build/intermediates/res/merged/debug/layout/selectbridge_item.xml",
+        "source": "/Users/supreet/GitHub/ApolloAndroid/app/src/main/res/layout/selectbridge_item.xml"
+    },
+    {
         "merged": "/Users/andersenyang/projects/QuickStartApp/app/build/intermediates/res/merged/debug/layout/home.xml",
         "source": "/Users/andersenyang/projects/QuickStartApp/app/src/main/res/layout/home.xml"
     },
     {
         "merged": "/Users/andersenyang/projects/QuickStartApp/app/build/intermediates/res/merged/debug/layout/bridgelistlinear.xml",
         "source": "/Users/andersenyang/projects/QuickStartApp/app/src/main/res/layout/bridgelistlinear.xml"
+    },
+    {
+        "merged": "/Users/supreet/GitHub/ApolloAndroid/app/build/intermediates/res/merged/debug/layout/bridgelistlinear.xml",
+        "source": "/Users/supreet/GitHub/ApolloAndroid/app/src/main/res/layout/bridgelistlinear.xml"
+    },
+    {
+        "merged": "/Users/supreet/GitHub/ApolloAndroid/app/build/intermediates/res/merged/debug/layout/pushlink.xml",
+        "source": "/Users/supreet/GitHub/ApolloAndroid/app/src/main/res/layout/pushlink.xml"
     }
 ]

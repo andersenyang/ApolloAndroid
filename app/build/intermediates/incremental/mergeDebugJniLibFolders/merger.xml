@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/andersenyang/projects/QuickStartApp/app/src/main/jniLibs"/></dataSet><dataSet config="debug"><source path="/Users/andersenyang/projects/QuickStartApp/app/src/debug/jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/supreet/GitHub/ApolloAndroid/app/src/main/jniLibs"/></dataSet><dataSet config="debug"><source path="/Users/supreet/GitHub/ApolloAndroid/app/src/debug/jniLibs"/></dataSet></merger>
