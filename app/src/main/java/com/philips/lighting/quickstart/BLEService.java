@@ -199,13 +199,12 @@ public class BLEService extends Service {
             Log.d(TAG, "Characteristic Changed");
             byte[] arr = characteristic.getValue();
             int arr_length = arr.length;
-            Log.d(TAG, String.valueOf(arr_length));
 
             if (arr_length == 4) {
                 // This means a gesture was sent
                 String gesture_string = new String(arr);
                 int gesture = Integer.valueOf(arr[0]);
-                int d = Log.d(TAG, String.valueOf(gesture));
+                Log.d(TAG, String.valueOf(gesture));
                 Intent i = new Intent("NEW_GESTURE");
                 i.putExtra("Key", gesture);
 
@@ -228,9 +227,31 @@ public class BLEService extends Service {
                 return;
             } else {
 
+                StringBuilder builder = new StringBuilder();
                 for (byte b : arr) {
-                    //Log.d(TAG, Integer.toBinaryString((b & 0xFF)));
+                    String str = Integer.toBinaryString((b & 0xFF));
+                    while (str.length() < 8) {
+                        String tmp = "0";
+                        tmp += str;
+                        str = tmp;
+                    }
+                    str = new StringBuilder(str).reverse().toString();
+                    builder.append(str);
+                    Log.d(TAG, str);
                 }
+                String s = builder.toString();
+                Intent i = new Intent("COORDINATES");
+                i.putExtra("Key", s);
+                sendBroadcast(i);
+/*
+                ./main
+                0 0 0 0 0 0 0 0
+                0 0 0 0 0 0 0 0
+                0 0 0 0 1 1 1 0
+                1 0 0 0 0 1 1 1
+                1 1 1 0 0 0 1 1
+                1 1 1 1 0 0 0 0
+               */
             }
 
         }

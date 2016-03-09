@@ -1,19 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" >
-
-    <item
-        jar="/Users/supreet/GitHub/ApolloAndroid/app/libs/huelocalsdk.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="07362e192094e402e032db4407c86e36080340ab">
-        <dex dex="/Users/supreet/GitHub/ApolloAndroid/app/build/intermediates/pre-dexed/debug/huelocalsdk_599b58cdacb4132c0f379e10c739bc9c03ffa283.jar" />
-    </item>
-    <item
-        jar="/Users/supreet/GitHub/ApolloAndroid/app/libs/huesdkresources.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="7183fbb86900448556ef87d3af0db01a77c27a09">
-        <dex dex="/Users/supreet/GitHub/ApolloAndroid/app/build/intermediates/pre-dexed/debug/huesdkresources_55a17e9102b3167adffda2d159ee1f9f0d12a748.jar" />
-    </item>
-
-</items>
+<items version="2" />

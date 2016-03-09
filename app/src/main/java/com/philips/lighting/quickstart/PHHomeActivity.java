@@ -54,8 +54,6 @@ public class PHHomeActivity extends Activity implements OnItemClickListener {
     
     private boolean lastSearchWasIPScan = false;
 
-    private BLEService mService;
-    private TextView textView;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,11 +98,7 @@ public class PHHomeActivity extends Activity implements OnItemClickListener {
 
         //textView = (TextView) findViewById(R.id.sample);
 
-        Log.d("Imperium", "onCreate");
-        Intent gattServiceIntent = new Intent(this, BLEService.class);
-        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
 
-        registerReceiver(gestureUpdated, new IntentFilter("NEW_GESTURE"));
     }
 
     @Override
@@ -255,34 +249,6 @@ public class PHHomeActivity extends Activity implements OnItemClickListener {
         return true;
     }
 
-    private final ServiceConnection mServiceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName componentName, IBinder service) {
-            Log.d("Imperium", "onServiceConnected");
-            mService = ((BLEService.LocalBinder) service).getService();
-            if (!mService.initialize()) {
-                finish();
-            }
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName componentName) {
-            mService = null;
-        }
-
-    };
-
-    private BroadcastReceiver gestureUpdated= new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            //textView.setText(intent.getExtras().getString("Key"));
-
-        }
-    };
-
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -291,8 +257,6 @@ public class PHHomeActivity extends Activity implements OnItemClickListener {
         }
         phHueSDK.disableAllHeartbeat();
 
-        unbindService(mServiceConnection);
-        mService = null;
     }
         
     @Override

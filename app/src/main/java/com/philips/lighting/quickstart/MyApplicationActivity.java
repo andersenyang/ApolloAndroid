@@ -5,11 +5,19 @@ import java.util.Map;
 import java.util.Random;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.philips.lighting.hue.listener.PHLightListener;
 import com.philips.lighting.hue.sdk.PHHueSDK;
@@ -31,7 +39,10 @@ public class MyApplicationActivity extends Activity {
 //    private PHHueSDK phHueSDK;
 //    private static final int MAX_HUE=65535;
     private HueAPIHelper hueHelper;
-    public static final String TAG = "QuickStart";
+    public static final String TAG = "Imperium";
+
+    private BLEService mService;
+    private TextView textView;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,8 +73,13 @@ public class MyApplicationActivity extends Activity {
 
         });
 
+        textView = (TextView) findViewById(R.id.gesture);
+        Log.d("Imperium", "onCreate");
+        Intent gattServiceIntent = new Intent(this, BLEService.class);
+        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
 
-
+        registerReceiver(gestureUpdated, new IntentFilter("NEW_GESTURE"));
+        registerReceiver(drawCoordinates, new IntentFilter("COORDINATES"));
     }
 
 //    public void randomLights() {
@@ -105,10 +121,52 @@ public class MyApplicationActivity extends Activity {
         @Override
         public void onSearchComplete() {}
     };
-    
+
+    private final ServiceConnection mServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder service) {
+            Log.d("Imperium", "onServiceConnected");
+            mService = ((BLEService.LocalBinder) service).getService();
+            if (!mService.initialize()) {
+                finish();
+            }
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            mService = null;
+        }
+
+    };
+
+    private BroadcastReceiver gestureUpdated = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            int gesture = intent.getExtras().getInt("Key");
+            Log.d(TAG, "GESTURE IS");
+            Log.d(TAG, String.valueOf(gesture));
+            textView.setText(String.valueOf(gesture));
+
+        }
+    };
+
+    private BroadcastReceiver drawCoordinates = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String coordinate_string = intent.getExtras().getString("Key");
+            Log.d(TAG, coordinate_string);
+        }
+    };
+
+
     @Override
     protected void onDestroy() {
         hueHelper.close();
         super.onDestroy();
+
+        unbindService(mServiceConnection);
+        mService = null;
     }
 }
