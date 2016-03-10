@@ -26,7 +26,7 @@ import com.philips.lighting.model.PHBridgeResource;
 import com.philips.lighting.model.PHHueError;
 import com.philips.lighting.model.PHLight;
 import com.philips.lighting.model.PHLightState;
-import com.philips.lighting.quickstart.HueAPIHelper;
+import com.philips.lighting.quickstart.GestureHandler;
 
 /**
  * MyApplicationActivity - The starting point for creating your own Hue App.  
@@ -36,9 +36,8 @@ import com.philips.lighting.quickstart.HueAPIHelper;
  *
  */
 public class MyApplicationActivity extends Activity {
-//    private PHHueSDK phHueSDK;
-//    private static final int MAX_HUE=65535;
-    private HueAPIHelper hueHelper;
+    //private HueAPIHelper hueHelper;
+    private GestureHandler gestureHandler;
     public static final String TAG = "Imperium";
 
     private BLEService mService;
@@ -49,31 +48,43 @@ public class MyApplicationActivity extends Activity {
         super.onCreate(savedInstanceState);
         setTitle(R.string.app_name);
         setContentView(R.layout.activity_main);
-//        phHueSDK = PHHueSDK.create();
-        hueHelper = new HueAPIHelper();
+        gestureHandler = new GestureHandler();
+        //hueHelper = new HueAPIHelper();
 
-        Button hueButton, brightnessButton, connectHueButton;
-        hueButton = (Button) findViewById(R.id.hueButton);
-        hueButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                hueHelper.changeLightColour();
-            }
-
-        });
-
-        brightnessButton = (Button) findViewById(R.id.brightnessButton);
-        brightnessButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                hueHelper.changeBrightness(true);
-            }
-
-        });
-
+        Button switchDevicesButton, actionOneButton,
+                actionTwoButton, connectHueButton;
+        switchDevicesButton = (Button) findViewById(R.id.switchDevicesButton);
+        actionOneButton = (Button) findViewById(R.id.actionOneButton);
+        actionTwoButton = (Button) findViewById(R.id.actionTwoButton);
         connectHueButton = (Button) findViewById(R.id.connectHueButton);
+
+        switchDevicesButton.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                gestureHandler.handleGesture(6);
+            }
+
+        });
+
+        actionOneButton.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                gestureHandler.handleGesture(1);
+            }
+
+        });
+
+        actionTwoButton.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                gestureHandler.handleGesture(2);
+            }
+
+        });
+
         connectHueButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,21 +104,6 @@ public class MyApplicationActivity extends Activity {
         registerReceiver(drawCoordinates, new IntentFilter("COORDINATES"));
     }
 
-//    public void randomLights() {
-//        PHBridge bridge = phHueSDK.getSelectedBridge();
-//
-//        List<PHLight> allLights = bridge.getResourceCache().getAllLights();
-//        Random rand = new Random();
-//
-//        for (PHLight light : allLights) {
-//            PHLightState lightState = new PHLightState();
-//            lightState.setHue(rand.nextInt(MAX_HUE));
-//            // To validate your lightstate is valid (before sending to the bridge) you can use:
-//            // String validState = lightState.validateState();
-//            bridge.updateLightState(light, lightState, listener);
-//            //  bridge.updateLightState(light, lightState);   // If no bridge response is required then use this simpler form.
-//        }
-//    }
     // If you want to handle the response from the bridge, create a PHLightListener object.
     PHLightListener listener = new PHLightListener() {
         
@@ -174,7 +170,8 @@ public class MyApplicationActivity extends Activity {
 
     @Override
     protected void onDestroy() {
-        hueHelper.close();
+        //hueHelper.close();
+        gestureHandler.close();
         super.onDestroy();
 
         unbindService(mServiceConnection);

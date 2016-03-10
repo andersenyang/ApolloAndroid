@@ -213,20 +213,20 @@ public class BLEService extends Service {
 
                 sendBroadcast(i);
 
-                AudioManager mgr = null;
-
-                mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-                int maxVolume = mgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-                int minVolume = 0;
-                int volume = mgr.getStreamVolume(AudioManager.STREAM_MUSIC);
-
-                if (gesture == 1) {
-                    volume += 2;
-                } else {
-                    volume -= 2;
-                }
-
-                mgr.setStreamVolume(AudioManager.STREAM_MUSIC, volume, AudioManager.FLAG_SHOW_UI);
+//                AudioManager mgr = null;
+//
+//                mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+//                int maxVolume = mgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+//                int minVolume = 0;
+//                int volume = mgr.getStreamVolume(AudioManager.STREAM_MUSIC);
+//
+//                if (gesture == 1) {
+//                    volume += 2;
+//                } else {
+//                    volume -= 2;
+//                }
+//
+//                mgr.setStreamVolume(AudioManager.STREAM_MUSIC, volume, AudioManager.FLAG_SHOW_UI);
                 return;
             } else {
 

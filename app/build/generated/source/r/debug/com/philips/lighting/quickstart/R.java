@@ -21,21 +21,23 @@ public final class R {
         public static final int pushlink_image=0x7f020003;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f080008;
-        public static final int bridge_ip=0x7f08000d;
-        public static final int bridge_list=0x7f080006;
-        public static final int bridge_mac=0x7f08000c;
-        public static final int brightnessButton=0x7f080002;
-        public static final int connectHueButton=0x7f080003;
-        public static final int countdownPB=0x7f08000b;
-        public static final int descriptionTextview=0x7f080009;
-        public static final int empty_list_view=0x7f080007;
-        public static final int find_new_bridge=0x7f08000f;
-        public static final int gesture=0x7f080004;
-        public static final int hueButton=0x7f080001;
-        public static final int imageView1=0x7f08000a;
-        public static final int linear1=0x7f080005;
-        public static final int refresh=0x7f08000e;
+        public static final int LinearLayout1=0x7f08000a;
+        public static final int actionOneButton=0x7f080002;
+        public static final int actionTwoButton=0x7f080003;
+        public static final int bridge_ip=0x7f08000f;
+        public static final int bridge_list=0x7f080008;
+        public static final int bridge_mac=0x7f08000e;
+        public static final int brightnessButton=0x7f080006;
+        public static final int connectHueButton=0x7f080004;
+        public static final int countdownPB=0x7f08000d;
+        public static final int descriptionTextview=0x7f08000b;
+        public static final int empty_list_view=0x7f080009;
+        public static final int find_new_bridge=0x7f080011;
+        public static final int gesture=0x7f080005;
+        public static final int imageView1=0x7f08000c;
+        public static final int linear1=0x7f080007;
+        public static final int refresh=0x7f080010;
+        public static final int switchDevicesButton=0x7f080001;
         public static final int textView1=0x7f080000;
     }
     public static final class layout {
@@ -52,34 +54,35 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f060000;
         public static final int app_name=0x7f060001;
-        public static final int btn_brightness=0x7f060002;
-        public static final int btn_cancel=0x7f060003;
-        public static final int btn_connect_hue=0x7f060004;
-        public static final int btn_find_bridge=0x7f060005;
-        public static final int btn_hue=0x7f060006;
+        public static final int btn_action_one=0x7f060002;
+        public static final int btn_action_two=0x7f060003;
+        public static final int btn_cancel=0x7f060004;
+        public static final int btn_connect_hue=0x7f060005;
+        public static final int btn_find_bridge=0x7f060006;
         public static final int btn_more=0x7f060007;
         public static final int btn_ok=0x7f060008;
         public static final int btn_random=0x7f060009;
         public static final int btn_reconnect=0x7f06000a;
         public static final int btn_refresh=0x7f06000b;
         public static final int btn_retry=0x7f06000c;
-        public static final int connecting=0x7f06000d;
-        public static final int could_not_find_bridge=0x7f06000e;
-        public static final int enter_light_name=0x7f06000f;
-        public static final int menu_find_bridge=0x7f060010;
-        public static final int menu_refresh=0x7f060011;
-        public static final int no_bridge=0x7f060012;
-        public static final int press_pushlink_button=0x7f060013;
-        public static final int search_progress=0x7f060014;
-        public static final int searching_for_bridges=0x7f060015;
-        public static final int title_error=0x7f060016;
-        public static final int txt_click_random_button=0x7f060017;
-        public static final int txt_could_not_connect=0x7f060018;
-        public static final int txt_last_heartbeat=0x7f060019;
-        public static final int txt_pushlink=0x7f06001a;
-        public static final int txt_sdk_version=0x7f06001b;
-        public static final int txt_select_smartbridge=0x7f06001c;
-        public static final int txt_selectbridges=0x7f06001d;
+        public static final int btn_switch_devices=0x7f06000d;
+        public static final int connecting=0x7f06000e;
+        public static final int could_not_find_bridge=0x7f06000f;
+        public static final int enter_light_name=0x7f060010;
+        public static final int menu_find_bridge=0x7f060011;
+        public static final int menu_refresh=0x7f060012;
+        public static final int no_bridge=0x7f060013;
+        public static final int press_pushlink_button=0x7f060014;
+        public static final int search_progress=0x7f060015;
+        public static final int searching_for_bridges=0x7f060016;
+        public static final int title_error=0x7f060017;
+        public static final int txt_click_random_button=0x7f060018;
+        public static final int txt_could_not_connect=0x7f060019;
+        public static final int txt_last_heartbeat=0x7f06001a;
+        public static final int txt_pushlink=0x7f06001b;
+        public static final int txt_sdk_version=0x7f06001c;
+        public static final int txt_select_smartbridge=0x7f06001d;
+        public static final int txt_selectbridges=0x7f06001e;
     }
     public static final class style {
         /**  API 11 theme customizations can go here. 

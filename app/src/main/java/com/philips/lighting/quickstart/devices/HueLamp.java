@@ -1,9 +1,6 @@
-package com.philips.lighting.quickstart;
+package com.philips.lighting.quickstart.devices;
 
 import java.util.List;
-import java.util.Random;
-
-import android.util.Log;
 
 import com.philips.lighting.hue.sdk.PHHueSDK;
 import com.philips.lighting.model.PHBridge;
@@ -11,15 +8,30 @@ import com.philips.lighting.model.PHBridgeResourcesCache;
 import com.philips.lighting.model.PHLight;
 import com.philips.lighting.model.PHLightState;
 
-public class HueAPIHelper {
+public class HueLamp extends Device {
     private PHHueSDK phHueSDK;
     private static final int MAX_HUE=65535;
     private static final int HUE_LEVELS=15;
     private static final int MAX_BRIGHTNESS=254;
     private static final int BRIGHTNESS_LEVELS=6;
 
-    public HueAPIHelper() {
+    public HueLamp() {
         phHueSDK = phHueSDK.create();
+    }
+
+    @Override
+    public void performAction (int gesture) {
+        switch (gesture) {
+            case 1:
+                changeBrightness(true);
+                break;
+            case 2:
+                changeLightColour();
+                break;
+            case 3:
+                // Needs implementation; what are we doing here?
+                break;
+        }
     }
 
     public void changeLightColour() {
@@ -72,6 +84,7 @@ public class HueAPIHelper {
         }
     }
 
+    @Override
     public void close() {
         PHBridge bridge = phHueSDK.getSelectedBridge();
         if (bridge != null) {
