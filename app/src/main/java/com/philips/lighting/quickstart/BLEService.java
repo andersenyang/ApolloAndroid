@@ -76,6 +76,9 @@ public class BLEService extends Service {
             return false;
         }
         BluetoothLeScanner scanner = mBluetoothAdapter.getBluetoothLeScanner();
+        if (scanner == null) {
+            return true;  // temporarily disable bluetooth requirement
+        }
         scanner.startScan(mScanCallback);
 
         Intent i = new Intent("NEW_GESTURE");

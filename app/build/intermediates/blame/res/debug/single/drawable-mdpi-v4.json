@@ -12,8 +12,20 @@
         "source": "/Users/supreet/GitHub/ApolloAndroid/app/src/main/res/drawable-mdpi/image_clear.png"
     },
     {
+        "merged": "/Users/andersenyang/projects/ApolloAndroid/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_launcher.png",
+        "source": "/Users/andersenyang/projects/ApolloAndroid/app/src/main/res/drawable-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/andersenyang/projects/ApolloAndroid/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/image_clear.png",
+        "source": "/Users/andersenyang/projects/ApolloAndroid/app/src/main/res/drawable-mdpi/image_clear.png"
+    },
+    {
         "merged": "/Users/andersenyang/projects/QuickStartApp/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/image_clear.png",
         "source": "/Users/andersenyang/projects/QuickStartApp/app/src/main/res/drawable-mdpi/image_clear.png"
+    },
+    {
+        "merged": "/Users/andersenyang/projects/ApolloAndroid/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/press_smartbridge.xml",
+        "source": "/Users/andersenyang/projects/ApolloAndroid/app/src/main/res/drawable-mdpi/press_smartbridge.xml"
     },
     {
         "merged": "/Users/andersenyang/projects/QuickStartApp/app/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_launcher.png",

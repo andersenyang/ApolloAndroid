@@ -52,7 +52,7 @@ public class MyApplicationActivity extends Activity {
 //        phHueSDK = PHHueSDK.create();
         hueHelper = new HueAPIHelper();
 
-        Button hueButton, brightnessButton;
+        Button hueButton, brightnessButton, connectHueButton;
         hueButton = (Button) findViewById(R.id.hueButton);
         hueButton.setOnClickListener(new OnClickListener() {
 
@@ -71,6 +71,17 @@ public class MyApplicationActivity extends Activity {
                 hueHelper.changeBrightness(true);
             }
 
+        });
+
+        connectHueButton = (Button) findViewById(R.id.connectHueButton);
+        connectHueButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PHHomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
         });
 
         textView = (TextView) findViewById(R.id.gesture);

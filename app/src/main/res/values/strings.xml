@@ -30,4 +30,5 @@
     <string name="txt_last_heartbeat">Last Heartbeat : </string>
     <string name="btn_hue">Change Colour</string>
     <string name="btn_brightness">Change Brightness</string>
+    <string name="btn_connect_hue">Connect to Hue Bridge</string>
 </resources>
