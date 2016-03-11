@@ -2,6 +2,8 @@ package com.philips.lighting.quickstart;
 
 import com.philips.lighting.quickstart.devices.*;
 
+import android.content.Context;
+
 /**
  * Created by andersenyang on 3/9/16.
  */
@@ -10,7 +12,8 @@ public class GestureHandler {
     private DeviceController controller;
     private DeviceEnum selectedDevice;
 
-    public GestureHandler() {
+    public GestureHandler(Context context) {
+        DeviceEnum.PHONE.getDevice().setContext(context);  // Phone needs context to control volume
         selectedDevice = DeviceEnum.HUE;
         controller = new DeviceController(selectedDevice.getDevice());
     }

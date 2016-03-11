@@ -2,6 +2,8 @@ package com.philips.lighting.quickstart;
 
 import com.philips.lighting.quickstart.devices.Device;
 
+import android.content.Context;
+
 /**
  * Created by andersenyang on 3/9/16.
  */

@@ -2,7 +2,7 @@ package com.philips.lighting.quickstart;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
+
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -20,13 +20,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.philips.lighting.hue.listener.PHLightListener;
-import com.philips.lighting.hue.sdk.PHHueSDK;
-import com.philips.lighting.model.PHBridge;
 import com.philips.lighting.model.PHBridgeResource;
 import com.philips.lighting.model.PHHueError;
 import com.philips.lighting.model.PHLight;
-import com.philips.lighting.model.PHLightState;
-import com.philips.lighting.quickstart.GestureHandler;
 
 /**
  * MyApplicationActivity - The starting point for creating your own Hue App.  
@@ -48,7 +44,7 @@ public class MyApplicationActivity extends Activity {
         super.onCreate(savedInstanceState);
         setTitle(R.string.app_name);
         setContentView(R.layout.activity_main);
-        gestureHandler = new GestureHandler();
+        gestureHandler = new GestureHandler(this);
         //hueHelper = new HueAPIHelper();
 
         Button switchDevicesButton, actionOneButton,
@@ -154,8 +150,8 @@ public class MyApplicationActivity extends Activity {
             int gesture = intent.getExtras().getInt("Key");
             Log.d(TAG, "GESTURE IS");
             Log.d(TAG, String.valueOf(gesture));
-            textView.setText(String.valueOf(gesture));
-
+            //textView.setText(String.valueOf(gesture));
+            gestureHandler.handleGesture(gesture);
         }
     };
 
