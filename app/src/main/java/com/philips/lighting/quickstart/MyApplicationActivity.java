@@ -15,6 +15,9 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -49,50 +52,6 @@ public class MyApplicationActivity extends Activity {
         gestureHandler = new GestureHandler(this);
         //hueHelper = new HueAPIHelper();
 
-        Button switchDevicesButton, actionOneButton,
-                actionTwoButton, connectHueButton;
-        switchDevicesButton = (Button) findViewById(R.id.switchDevicesButton);
-        actionOneButton = (Button) findViewById(R.id.actionOneButton);
-        actionTwoButton = (Button) findViewById(R.id.actionTwoButton);
-        connectHueButton = (Button) findViewById(R.id.connectHueButton);
-
-        switchDevicesButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                gestureHandler.handleGesture(6);
-            }
-
-        });
-
-        actionOneButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                gestureHandler.handleGesture(1);
-            }
-
-        });
-
-        actionTwoButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                gestureHandler.handleGesture(2);
-            }
-
-        });
-
-        connectHueButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), PHHomeActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-        });
-
         textView = (TextView) findViewById(R.id.gesture);
         canvasView = (CanvasView) findViewById(R.id.canvasView);
 
@@ -102,6 +61,24 @@ public class MyApplicationActivity extends Activity {
 
         registerReceiver(gestureUpdated, new IntentFilter("NEW_GESTURE"));
         registerReceiver(drawCoordinates, new IntentFilter("COORDINATES"));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.settings:
+                Intent intent = new Intent(this, ControlActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return true;
     }
 
     // If you want to handle the response from the bridge, create a PHLightListener object.

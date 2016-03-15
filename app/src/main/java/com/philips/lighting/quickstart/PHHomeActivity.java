@@ -242,7 +242,7 @@ public class PHHomeActivity extends Activity implements OnItemClickListener {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case R.id.find_new_bridge:
+        case R.id.settings:
             doBridgeSearch();
             break;
         }
