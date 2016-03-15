@@ -6,9 +6,5 @@
     {
         "merged": "/Users/supreet/GitHub/ApolloAndroid/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/press_smartbridge.xml",
         "source": "/Users/supreet/GitHub/ApolloAndroid/app/src/main/res/drawable-ldpi/press_smartbridge.xml"
-    },
-    {
-        "merged": "/Users/andersenyang/projects/QuickStartApp/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/press_smartbridge.xml",
-        "source": "/Users/andersenyang/projects/QuickStartApp/app/src/main/res/drawable-ldpi/press_smartbridge.xml"
     }
 ]

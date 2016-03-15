@@ -15,12 +15,14 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int image_clear=0x7f020001;
-        public static final int press_smartbridge=0x7f020002;
-        public static final int pushlink_image=0x7f020003;
+        public static final int border=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
+        public static final int image_clear=0x7f020002;
+        public static final int press_smartbridge=0x7f020003;
+        public static final int pushlink_image=0x7f020004;
     }
     public static final class id {
+<<<<<<< Updated upstream
         public static final int LinearLayout1=0x7f08000a;
         public static final int actionOneButton=0x7f080002;
         public static final int actionTwoButton=0x7f080003;
@@ -38,6 +40,23 @@ public final class R {
         public static final int linear1=0x7f080007;
         public static final int refresh=0x7f080010;
         public static final int switchDevicesButton=0x7f080001;
+=======
+        public static final int LinearLayout1=0x7f080008;
+        public static final int bridge_ip=0x7f08000d;
+        public static final int bridge_list=0x7f080006;
+        public static final int bridge_mac=0x7f08000c;
+        public static final int brightnessButton=0x7f080002;
+        public static final int canvasView=0x7f080004;
+        public static final int countdownPB=0x7f08000b;
+        public static final int descriptionTextview=0x7f080009;
+        public static final int empty_list_view=0x7f080007;
+        public static final int find_new_bridge=0x7f08000f;
+        public static final int gesture=0x7f080003;
+        public static final int hueButton=0x7f080001;
+        public static final int imageView1=0x7f08000a;
+        public static final int linear1=0x7f080005;
+        public static final int refresh=0x7f08000e;
+>>>>>>> Stashed changes
         public static final int textView1=0x7f080000;
     }
     public static final class layout {

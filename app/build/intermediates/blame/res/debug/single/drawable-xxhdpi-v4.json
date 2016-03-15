@@ -8,6 +8,7 @@
         "source": "/Users/supreet/GitHub/ApolloAndroid/app/src/main/res/drawable-xxhdpi/ic_launcher.png"
     },
     {
+<<<<<<< Updated upstream
         "merged": "/Users/andersenyang/projects/ApolloAndroid/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/ic_launcher.png",
         "source": "/Users/andersenyang/projects/ApolloAndroid/app/src/main/res/drawable-xxhdpi/ic_launcher.png"
     },
@@ -20,6 +21,8 @@
         "source": "/Users/andersenyang/projects/QuickStartApp/app/src/main/res/drawable-xxhdpi/ic_launcher.png"
     },
     {
+=======
+>>>>>>> Stashed changes
         "merged": "/Users/supreet/GitHub/ApolloAndroid/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/press_smartbridge.xml",
         "source": "/Users/supreet/GitHub/ApolloAndroid/app/src/main/res/drawable-xxhdpi/press_smartbridge.xml"
     }

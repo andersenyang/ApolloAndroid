@@ -4,6 +4,7 @@
         "source": "/Users/supreet/GitHub/ApolloAndroid/app/src/main/res/layout/activity_main.xml"
     },
     {
+<<<<<<< Updated upstream
         "merged": "/Users/andersenyang/projects/ApolloAndroid/app/build/intermediates/res/merged/debug/layout/bridgelistlinear.xml",
         "source": "/Users/andersenyang/projects/ApolloAndroid/app/src/main/res/layout/bridgelistlinear.xml"
     },
@@ -32,6 +33,8 @@
         "source": "/Users/andersenyang/projects/QuickStartApp/app/src/main/res/layout/activity_main.xml"
     },
     {
+=======
+>>>>>>> Stashed changes
         "merged": "/Users/supreet/GitHub/ApolloAndroid/app/build/intermediates/res/merged/debug/layout/home.xml",
         "source": "/Users/supreet/GitHub/ApolloAndroid/app/src/main/res/layout/home.xml"
     },
@@ -40,6 +43,7 @@
         "source": "/Users/supreet/GitHub/ApolloAndroid/app/src/main/res/layout/selectbridge_item.xml"
     },
     {
+<<<<<<< Updated upstream
         "merged": "/Users/andersenyang/projects/QuickStartApp/app/build/intermediates/res/merged/debug/layout/home.xml",
         "source": "/Users/andersenyang/projects/QuickStartApp/app/src/main/res/layout/home.xml"
     },
@@ -52,6 +56,8 @@
         "source": "/Users/andersenyang/projects/QuickStartApp/app/src/main/res/layout/bridgelistlinear.xml"
     },
     {
+=======
+>>>>>>> Stashed changes
         "merged": "/Users/supreet/GitHub/ApolloAndroid/app/build/intermediates/res/merged/debug/layout/bridgelistlinear.xml",
         "source": "/Users/supreet/GitHub/ApolloAndroid/app/src/main/res/layout/bridgelistlinear.xml"
     },

@@ -6,9 +6,5 @@
     {
         "merged": "/Users/supreet/GitHub/ApolloAndroid/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/pushlink_image.png",
         "source": "/Users/supreet/GitHub/ApolloAndroid/app/src/main/res/drawable-nodpi/pushlink_image.png"
-    },
-    {
-        "merged": "/Users/andersenyang/projects/QuickStartApp/app/build/intermediates/res/merged/debug/drawable-nodpi-v4/pushlink_image.png",
-        "source": "/Users/andersenyang/projects/QuickStartApp/app/src/main/res/drawable-nodpi/pushlink_image.png"
     }
 ]

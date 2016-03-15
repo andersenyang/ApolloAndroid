@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< Updated upstream
         "merged": "/Users/andersenyang/projects/ApolloAndroid/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/press_smartbridge.xml",
         "source": "/Users/andersenyang/projects/ApolloAndroid/app/src/main/res/drawable-hdpi/press_smartbridge.xml"
     },
@@ -8,6 +9,8 @@
         "source": "/Users/andersenyang/projects/QuickStartApp/app/src/main/res/drawable-hdpi/press_smartbridge.xml"
     },
     {
+=======
+>>>>>>> Stashed changes
         "merged": "/Users/supreet/GitHub/ApolloAndroid/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/press_smartbridge.xml",
         "source": "/Users/supreet/GitHub/ApolloAndroid/app/src/main/res/drawable-hdpi/press_smartbridge.xml"
     },
@@ -18,9 +21,5 @@
     {
         "merged": "/Users/supreet/GitHub/ApolloAndroid/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_launcher.png",
         "source": "/Users/supreet/GitHub/ApolloAndroid/app/src/main/res/drawable-hdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/Users/andersenyang/projects/QuickStartApp/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_launcher.png",
-        "source": "/Users/andersenyang/projects/QuickStartApp/app/src/main/res/drawable-hdpi/ic_launcher.png"
     }
 ]
