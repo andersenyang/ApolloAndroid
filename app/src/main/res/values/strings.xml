@@ -29,7 +29,7 @@
     <string name="title_error">Error</string>
     <string name="txt_last_heartbeat">Last Heartbeat : </string>
     <string name="btn_switch_devices">Switch Devices</string>
-    <string name="btn_action_one">Perform First Action</string>
-    <string name="btn_action_two">Perform Second Action</string>
+    <string name="btn_action_one">First Action</string>
+    <string name="btn_action_two">Second Action</string>
     <string name="btn_connect_hue">Connect to Hue Bridge</string>
 </resources>

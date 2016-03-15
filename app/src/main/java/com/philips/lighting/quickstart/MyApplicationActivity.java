@@ -13,6 +13,7 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,7 +39,8 @@ public class MyApplicationActivity extends Activity {
 
     private BLEService mService;
     private TextView textView;
-    
+    private CanvasView canvasView;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +94,8 @@ public class MyApplicationActivity extends Activity {
         });
 
         textView = (TextView) findViewById(R.id.gesture);
+        canvasView = (CanvasView) findViewById(R.id.canvasView);
+
         Log.d("Imperium", "onCreate");
         Intent gattServiceIntent = new Intent(this, BLEService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
@@ -158,7 +162,16 @@ public class MyApplicationActivity extends Activity {
     private BroadcastReceiver drawCoordinates = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            canvasView.reset();
             String coordinate_string = intent.getExtras().getString("Key");
+            char[] coordinate_array = coordinate_string.toCharArray();
+            Log.d(TAG, "ARR LENGTH");
+            Log.d(TAG, String.valueOf(coordinate_array.length));
+            for (int i = 0; i < coordinate_array.length; i++) {
+                if (coordinate_array[i] == '1') {
+                    canvasView.setPoint(i);
+                }
+            }
             Log.d(TAG, coordinate_string);
         }
     };

@@ -167,6 +167,8 @@ public class BLEService extends Service {
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 for (BluetoothGattService service : gatt.getServices()) {
+                    Log.d(TAG, "SERVICES");
+                    Log.d(TAG, service.getUuid().toString());
                     if (service.getUuid().toString().equals(UUID.fromString(SERVICE_UUID).toString())) {
                         Log.d(TAG, "Service found");
                         for (BluetoothGattCharacteristic c : service.getCharacteristics()) {
@@ -177,7 +179,7 @@ public class BLEService extends Service {
                         BluetoothGattDescriptor descriptor = characteristic.getDescriptor(UUID.fromString(DESCRIPTOR_UUID));
                         descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
                         gatt.writeDescriptor(descriptor);
-                        //Log.d(TAG, String.valueOf(gatt.readCharacteristic(characteristic)));
+                        Log.d(TAG, String.valueOf(gatt.readCharacteristic(characteristic)));
                     }
                 }
             } else {
@@ -255,6 +257,13 @@ public class BLEService extends Service {
                 1 1 1 0 0 0 1 1
                 1 1 1 1 0 0 0 0
                */
+
+                // 0 0 0 0 0 0 0 0 0
+                // 0 0 0 0 0 0 0 0 0
+                // 0 0 1 1 1 0 1 0 0
+                // 0 0 1 1 1 1 1 1 0
+                // 0 0 1 1 1 1 1 1 0
+                // 0 0 0
             }
 
         }
