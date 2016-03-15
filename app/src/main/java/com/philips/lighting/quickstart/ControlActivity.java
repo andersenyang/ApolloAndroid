@@ -18,10 +18,12 @@ public class ControlActivity extends Activity {
         gestureHandler = new GestureHandler(this);
 
         Button switchDevicesButton, actionOneButton,
-                actionTwoButton, connectHueButton;
+                actionTwoButton, actionThreeButton,
+                connectHueButton;
         switchDevicesButton = (Button) findViewById(R.id.switchDevicesButton);
         actionOneButton = (Button) findViewById(R.id.actionOneButton);
         actionTwoButton = (Button) findViewById(R.id.actionTwoButton);
+        actionThreeButton = (Button) findViewById(R.id.actionThreeButton);
         connectHueButton = (Button) findViewById(R.id.connectHueButton);
 
         switchDevicesButton.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +53,15 @@ public class ControlActivity extends Activity {
 
         });
 
+        actionThreeButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                gestureHandler.handleGesture(3);
+            }
+
+        });
+
         connectHueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,5 +71,11 @@ public class ControlActivity extends Activity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        gestureHandler.close();
+        super.onDestroy();
     }
 }
