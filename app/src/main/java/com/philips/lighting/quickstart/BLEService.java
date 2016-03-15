@@ -77,11 +77,7 @@ public class BLEService extends Service {
         }
         BluetoothLeScanner scanner = mBluetoothAdapter.getBluetoothLeScanner();
         if (scanner == null) {
-<<<<<<< Updated upstream
             return true;  // temporarily disable bluetooth requirement
-=======
-            return true;
->>>>>>> Stashed changes
         }
         scanner.startScan(mScanCallback);
 
