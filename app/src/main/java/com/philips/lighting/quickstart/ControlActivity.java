@@ -1,0 +1,64 @@
+package com.philips.lighting.quickstart;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+public class ControlActivity extends Activity {
+
+    private GestureHandler gestureHandler;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_control);
+
+        gestureHandler = new GestureHandler(this);
+
+        Button switchDevicesButton, actionOneButton,
+                actionTwoButton, connectHueButton;
+        switchDevicesButton = (Button) findViewById(R.id.switchDevicesButton);
+        actionOneButton = (Button) findViewById(R.id.actionOneButton);
+        actionTwoButton = (Button) findViewById(R.id.actionTwoButton);
+        connectHueButton = (Button) findViewById(R.id.connectHueButton);
+
+        switchDevicesButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                gestureHandler.handleGesture(6);
+            }
+
+        });
+
+        actionOneButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                gestureHandler.handleGesture(1);
+            }
+
+        });
+
+        actionTwoButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                gestureHandler.handleGesture(2);
+            }
+
+        });
+
+        connectHueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PHHomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+    }
+}
