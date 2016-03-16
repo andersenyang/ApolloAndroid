@@ -19,7 +19,6 @@ import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanResult;
 import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
@@ -32,6 +31,7 @@ public class BLEService extends Service {
     private BluetoothAdapter mBluetoothAdapter;
     private BluetoothGatt mBluetoothGatt;
     private String mBluetoothAddress;
+    private GestureHandler gestureHandler;
 
     private String TAG = "Imperium";
     private BLEService self = this;
@@ -41,6 +41,11 @@ public class BLEService extends Service {
     private String DESCRIPTOR_UUID = "00002902-0000-1000-8000-00805f9b34fb";
 
     public BLEService() {
+    }
+
+    @Override
+    public void onDestroy() {
+        gestureHandler.close();
     }
 
     @Override
@@ -62,7 +67,7 @@ public class BLEService extends Service {
     private final IBinder mBinder = new LocalBinder();
 
     public boolean initialize() {
-
+        gestureHandler = new GestureHandler(this);
         if (mBluetoothManager == null) {
             mBluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
             if (mBluetoothManager == null) {
@@ -214,21 +219,7 @@ public class BLEService extends Service {
                 i.putExtra("Key", gesture);
 
                 sendBroadcast(i);
-
-//                AudioManager mgr = null;
-//
-//                mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-//                int maxVolume = mgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-//                int minVolume = 0;
-//                int volume = mgr.getStreamVolume(AudioManager.STREAM_MUSIC);
-//
-//                if (gesture == 1) {
-//                    volume += 2;
-//                } else {
-//                    volume -= 2;
-//                }
-//
-//                mgr.setStreamVolume(AudioManager.STREAM_MUSIC, volume, AudioManager.FLAG_SHOW_UI);
+                gestureHandler.handleGesture(gesture);
                 return;
             } else {
 

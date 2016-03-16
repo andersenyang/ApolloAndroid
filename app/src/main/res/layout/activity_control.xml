@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/switchDevicesButton"
-        android:layout_centerHorizontal="false"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="@string/btn_action_one" android:paddingLeft="10dp" android:paddingRight="10dp"/>
 
@@ -37,20 +37,26 @@
         android:id="@+id/actionTwoButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/switchDevicesButton"
-        android:layout_toRightOf="@+id/actionOneButton"
-        android:layout_alignParentRight="true"
-        android:layout_centerHorizontal="false"
+        android:layout_below="@+id/actionOneButton"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="@string/btn_action_two" android:paddingLeft="10dp" android:paddingRight="10dp"/>
 
     <Button
-        android:id="@+id/connectHueButton"
+        android:id="@+id/actionThreeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/actionTwoButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
+        android:text="@string/btn_action_three" android:paddingLeft="10dp" android:paddingRight="10dp"/>
+
+    <Button
+        android:id="@+id/connectHueButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
         android:text="@string/btn_connect_hue" android:paddingLeft="10dp" android:paddingRight="10dp"/>
 
 

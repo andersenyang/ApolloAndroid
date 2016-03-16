@@ -15,14 +15,10 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.philips.lighting.hue.listener.PHLightListener;
@@ -38,8 +34,6 @@ import com.philips.lighting.model.PHLight;
  *
  */
 public class MyApplicationActivity extends Activity {
-    //private HueAPIHelper hueHelper;
-    private GestureHandler gestureHandler;
     public static final String TAG = "Imperium";
 
     private BLEService mService;
@@ -51,8 +45,6 @@ public class MyApplicationActivity extends Activity {
         super.onCreate(savedInstanceState);
         setTitle(R.string.app_name);
         setContentView(R.layout.activity_main);
-        gestureHandler = new GestureHandler(this);
-        //hueHelper = new HueAPIHelper();
 
         getActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
         getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#26c7db")));
@@ -87,31 +79,6 @@ public class MyApplicationActivity extends Activity {
         return true;
     }
 
-    // If you want to handle the response from the bridge, create a PHLightListener object.
-    PHLightListener listener = new PHLightListener() {
-        
-        @Override
-        public void onSuccess() {  
-        }
-        
-        @Override
-        public void onStateUpdate(Map<String, String> arg0, List<PHHueError> arg1) {
-           Log.w(TAG, "Light has updated");
-        }
-        
-        @Override
-        public void onError(int arg0, String arg1) {}
-
-        @Override
-        public void onReceivingLightDetails(PHLight arg0) {}
-
-        @Override
-        public void onReceivingLights(List<PHBridgeResource> arg0) {}
-
-        @Override
-        public void onSearchComplete() {}
-    };
-
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder service) {
@@ -138,7 +105,6 @@ public class MyApplicationActivity extends Activity {
             Log.d(TAG, "GESTURE IS");
             Log.d(TAG, String.valueOf(gesture));
             //textView.setText(String.valueOf(gesture));
-            gestureHandler.handleGesture(gesture);
         }
     };
 
@@ -162,8 +128,6 @@ public class MyApplicationActivity extends Activity {
 
     @Override
     protected void onDestroy() {
-        //hueHelper.close();
-        gestureHandler.close();
         super.onDestroy();
 
         unbindService(mServiceConnection);
