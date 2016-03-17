@@ -80,6 +80,7 @@ public class PHHomeActivity extends Activity implements OnItemClickListener {
         prefs = HueSharedPreferences.getInstance(getApplicationContext());
         String lastIpAddress   = prefs.getLastConnectedIPAddress();
         String lastUsername    = prefs.getUsername();
+        Log.d("Imperium", lastIpAddress + "   " + lastUsername);
 
         // Automatically try to connect to the last connected IP Address.  For multiple bridge support a different implementation is required.
         if (lastIpAddress !=null && !lastIpAddress.equals("")) {

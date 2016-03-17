@@ -2,7 +2,11 @@ package com.philips.lighting.quickstart;
 
 import com.philips.lighting.quickstart.devices.*;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
+import android.widget.RemoteViews;
 import android.widget.Toast;
 import android.util.Log;
 
@@ -15,6 +19,7 @@ public class GestureHandler {
     private DeviceEnum selectedDevice;
     private Context context;
     private static GestureHandler instance = null;
+    private GestureHandler self = this;
 
     private GestureHandler() {}
     private GestureHandler(Context context) {
@@ -26,6 +31,7 @@ public class GestureHandler {
     }
 
     public static GestureHandler getInstance(Context context) {
+        Log.d("Imperium", context.toString());
         if (instance == null) {
             instance = new GestureHandler(context);
         }
@@ -49,8 +55,13 @@ public class GestureHandler {
                 this.selectedDevice = DeviceEnum.PHONE;
                 break;
         }
-        //Toast.makeText(this.context, this.selectedDevice.toString(), Toast.LENGTH_SHORT).show();
         controller.setDevice(this.selectedDevice.getDevice());
+        final Activity activity = (Activity) this.context;
+        activity.runOnUiThread(new Runnable() {
+            public void run() {
+                Toast.makeText(activity, self.selectedDevice.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void close() {

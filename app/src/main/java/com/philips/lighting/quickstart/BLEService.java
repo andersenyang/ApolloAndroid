@@ -24,6 +24,9 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.philips.lighting.hue.sdk.PHAccessPoint;
+import com.philips.lighting.hue.sdk.PHHueSDK;
+
 import java.util.UUID;
 
 public class BLEService extends Service {
@@ -93,7 +96,10 @@ public class BLEService extends Service {
 
         sendBroadcast(i);
 
-        Log.d(TAG, "Scan Started");
+        //Log.d(TAG, "Scan Started");
+
+        HueHelper helper = new HueHelper();
+
         return true;
     }
 
@@ -113,7 +119,7 @@ public class BLEService extends Service {
                 BluetoothDevice device = result.getDevice();
                 if (device.getName() == null) { return; }
                 if (device.getName().equals("buckle")) {    //TODO: Hardcoded name, change logic
-                    Log.d(TAG, "Buckle found");
+                    //Log.d(TAG, "Buckle found");
                     connect(device.getAddress());
                 }
             }
@@ -128,7 +134,7 @@ public class BLEService extends Service {
         // Previously connected device.  Try to reconnect.
         if (mBluetoothAddress != null && address.equals(mBluetoothAddress)
                 && mBluetoothGatt != null) {
-            Log.d(TAG, "Trying to use an existing mBluetoothGatt for connection.");
+            //Log.d(TAG, "Trying to use an existing mBluetoothGatt for connection.");
             if (mBluetoothGatt.connect()) {
                 return true;
             } else {
@@ -137,13 +143,13 @@ public class BLEService extends Service {
         }
         final BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
         if (device == null) {
-            Log.w(TAG, "Device not found.  Unable to connect.");
+            //Log.w(TAG, "Device not found.  Unable to connect.");
             return false;
         }
         // We want to directly connect to the device, so we are setting the autoConnect
         // parameter to false.
         mBluetoothGatt = device.connectGatt(this, true, mGattCallback);
-        Log.d(TAG, "Trying to create a new connection.");
+        //Log.d(TAG, "Trying to create a new connection.");
         mBluetoothAddress = address;
         return true;
     }
@@ -161,12 +167,13 @@ public class BLEService extends Service {
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             String intentAction;
             if (newState == BluetoothProfile.STATE_CONNECTED) {
-                Log.i(TAG, "Connected to GATT server.");
+                //Log.i(TAG, "Connected to GATT server.");
                 // Attempts to discover services after successful connection.
-                Log.i(TAG, "Attempting to start service discovery:" +
-                        mBluetoothGatt.discoverServices());
+                //Log.i(TAG, "Attempting to start service discovery:" +
+                 //       mBluetoothGatt.discoverServices());
+                mBluetoothGatt.discoverServices();
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
-                Log.i(TAG, "Disconnected from GATT server.");
+                //Log.i(TAG, "Disconnected from GATT server.");
             }
         }
 
@@ -174,12 +181,11 @@ public class BLEService extends Service {
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 for (BluetoothGattService service : gatt.getServices()) {
-                    Log.d(TAG, "SERVICES");
-                    Log.d(TAG, service.getUuid().toString());
+                    //Log.d(TAG, service.getUuid().toString());
                     if (service.getUuid().toString().equals(UUID.fromString(SERVICE_UUID).toString())) {
-                        Log.d(TAG, "Service found");
+                        //Log.d(TAG, "Service found");
                         for (BluetoothGattCharacteristic c : service.getCharacteristics()) {
-                            Log.d(TAG, c.getUuid().toString());
+                            //Log.d(TAG, c.getUuid().toString());
                         }
                         BluetoothGattCharacteristic characteristic = service.getCharacteristic(UUID.fromString(CHARACTERISTIC_UUID));
                         gatt.setCharacteristicNotification(characteristic, true);
@@ -198,10 +204,10 @@ public class BLEService extends Service {
         public void onCharacteristicRead(BluetoothGatt gatt,
                                          BluetoothGattCharacteristic characteristic,
                                          int status) {
-            Log.d(TAG, "onCharacteristicRead");
+            //Log.d(TAG, "onCharacteristicRead");
             Toast.makeText(getApplicationContext(), "hi" , Toast.LENGTH_LONG).show();
             if (status == BluetoothGatt.GATT_SUCCESS) {
-                Log.d(TAG, characteristic.getStringValue(0));
+                //Log.d(TAG, characteristic.getStringValue(0));
             }
         }
 
@@ -209,14 +215,13 @@ public class BLEService extends Service {
         public void onCharacteristicChanged(BluetoothGatt gatt,
                                             BluetoothGattCharacteristic characteristic) {
 
-            Log.d(TAG, "Characteristic Changed");
+            //Log.d(TAG, "Characteristic Changed");
             byte[] arr = characteristic.getValue();
             int arr_length = arr.length;
 
             if (arr_length == 4) {
                 // This means a gesture was sent
                 int gesture = Integer.valueOf(arr[0]);
-                Log.d(TAG, String.valueOf(gesture));
                 Intent i = new Intent("NEW_GESTURE");
                 i.putExtra("Key", gesture);
 
