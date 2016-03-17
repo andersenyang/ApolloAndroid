@@ -15,7 +15,7 @@ public class ControlActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control);
 
-        gestureHandler = new GestureHandler(this);
+        gestureHandler = GestureHandler.getInstance(this);  //context needs to be the Service!
 
         Button switchDevicesButton, actionOneButton,
                 actionTwoButton, actionThreeButton,

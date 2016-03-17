@@ -74,7 +74,7 @@ public class CanvasView extends View {
         this.y_arr = new ArrayList<Integer>();
     }
     public void setPoint(int x) {
-        Log.d("Imperium", String.valueOf(x));
+        //Log.d("Imperium", String.valueOf(x));
         int col = x % 9 + 1;
         int row = x /9 + 1;
         this.x_arr.add(col * this.blockWidth);

@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.UUID;
 
@@ -32,6 +33,7 @@ public class BLEService extends Service {
     private BluetoothGatt mBluetoothGatt;
     private String mBluetoothAddress;
     private GestureHandler gestureHandler;
+    private Context appContext;
 
     private String TAG = "Imperium";
     private BLEService self = this;
@@ -66,8 +68,8 @@ public class BLEService extends Service {
 
     private final IBinder mBinder = new LocalBinder();
 
-    public boolean initialize() {
-        gestureHandler = new GestureHandler(this);
+    public boolean initialize(Context c) {
+        gestureHandler = GestureHandler.getInstance(c);
         if (mBluetoothManager == null) {
             mBluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
             if (mBluetoothManager == null) {
@@ -197,6 +199,7 @@ public class BLEService extends Service {
                                          BluetoothGattCharacteristic characteristic,
                                          int status) {
             Log.d(TAG, "onCharacteristicRead");
+            Toast.makeText(getApplicationContext(), "hi" , Toast.LENGTH_LONG).show();
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 Log.d(TAG, characteristic.getStringValue(0));
             }
@@ -212,7 +215,6 @@ public class BLEService extends Service {
 
             if (arr_length == 4) {
                 // This means a gesture was sent
-                String gesture_string = new String(arr);
                 int gesture = Integer.valueOf(arr[0]);
                 Log.d(TAG, String.valueOf(gesture));
                 Intent i = new Intent("NEW_GESTURE");
@@ -233,7 +235,7 @@ public class BLEService extends Service {
                     }
                     str = new StringBuilder(str).reverse().toString();
                     builder.append(str);
-                    Log.d(TAG, str);
+                    //Log.d(TAG, str);
                 }
                 String s = builder.toString();
                 Intent i = new Intent("COORDINATES");

@@ -1,5 +1,7 @@
 package com.philips.lighting.quickstart.devices;
 
+import android.util.Log;
+
 import java.util.List;
 
 import com.philips.lighting.hue.sdk.PHHueSDK;
@@ -23,6 +25,7 @@ public class HueLamp extends Device {
 
     @Override
     public void performAction (int gesture) {
+        Log.d("Imperium", "Hue called");
         switch (gesture) {
             case 1:
                 changeBrightness(true);

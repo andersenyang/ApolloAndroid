@@ -37,6 +37,7 @@ public class MyApplicationActivity extends Activity {
     private BLEService mService;
     private TextView textView;
     private CanvasView canvasView;
+    private Context self = this;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,7 +79,7 @@ public class MyApplicationActivity extends Activity {
         public void onServiceConnected(ComponentName componentName, IBinder service) {
             Log.d("Imperium", "onServiceConnected");
             mService = ((BLEService.LocalBinder) service).getService();
-            if (!mService.initialize()) {
+            if (!mService.initialize(self)) {
                 finish();
             }
         }
@@ -98,7 +99,7 @@ public class MyApplicationActivity extends Activity {
             int gesture = intent.getExtras().getInt("Key");
             Log.d(TAG, "GESTURE IS");
             Log.d(TAG, String.valueOf(gesture));
-            //textView.setText(String.valueOf(gesture));
+            textView.setText(String.valueOf(gesture));
         }
     };
 
@@ -108,14 +109,14 @@ public class MyApplicationActivity extends Activity {
             canvasView.reset();
             String coordinate_string = intent.getExtras().getString("Key");
             char[] coordinate_array = coordinate_string.toCharArray();
-            Log.d(TAG, "ARR LENGTH");
-            Log.d(TAG, String.valueOf(coordinate_array.length));
+//            Log.d(TAG, "ARR LENGTH");
+//            Log.d(TAG, String.valueOf(coordinate_array.length));
             for (int i = 0; i < coordinate_array.length; i++) {
                 if (coordinate_array[i] == '1') {
                     canvasView.setPoint(i);
                 }
             }
-            Log.d(TAG, coordinate_string);
+//            Log.d(TAG, coordinate_string);
         }
     };
 

@@ -4,6 +4,7 @@ import com.philips.lighting.quickstart.devices.*;
 
 import android.content.Context;
 import android.widget.Toast;
+import android.util.Log;
 
 /**
  * Created by andersenyang on 3/9/16.
@@ -12,18 +13,31 @@ import android.widget.Toast;
 public class GestureHandler {
     private DeviceController controller;
     private DeviceEnum selectedDevice;
-
     private Context context;
+    private static GestureHandler instance = null;
 
-    public GestureHandler(Context context) {
+    private GestureHandler() {}
+    private GestureHandler(Context context) {
         DeviceEnum.PHONE.getDevice().setContext(context);  // Phone needs context to control volume
-        selectedDevice = DeviceEnum.PHONE;
+        this.selectedDevice = DeviceEnum.PHONE;
         this.context = context;
-        controller = new DeviceController(selectedDevice.getDevice());
+
+        controller = new DeviceController(this.selectedDevice.getDevice());
+    }
+
+    public static GestureHandler getInstance(Context context) {
+        if (instance == null) {
+            Log.d("Imperium", "GestureHandler create new instance");
+            instance = new GestureHandler(context);
+        }
+        Log.d("Imperium", "GestureHandler return existing instance");
+        return instance;
     }
 
     public void handleGesture(int gesture) {
+        Log.d("Imperium", "handleGesture");
         if (gesture == 6) {
+            Log.d("Imperium", "desperate Log");
             switchDevices();
         } else {
             controller.performDeviceAction(gesture);
@@ -31,16 +45,17 @@ public class GestureHandler {
     }
 
     private void switchDevices() {
-        switch (selectedDevice) {
+        Log.d("Imperium", String.valueOf(this.selectedDevice));
+        switch (this.selectedDevice) {
             case PHONE:
-                selectedDevice = DeviceEnum.HUE;
+                this.selectedDevice = DeviceEnum.HUE;
                 break;
             case HUE:
-                selectedDevice = DeviceEnum.PHONE;
+                this.selectedDevice = DeviceEnum.PHONE;
                 break;
         }
-        Toast.makeText(this.context, selectedDevice.toString(), Toast.LENGTH_SHORT).show();
-        controller.setDevice(selectedDevice.getDevice());
+        Toast.makeText(this.context, this.selectedDevice.toString(), Toast.LENGTH_SHORT).show();
+        controller.setDevice(this.selectedDevice.getDevice());
     }
 
     public void close() {
