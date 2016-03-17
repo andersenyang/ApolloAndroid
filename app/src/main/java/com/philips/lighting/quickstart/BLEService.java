@@ -92,7 +92,7 @@ public class BLEService extends Service {
         scanner.startScan(mScanCallback);
 
         Intent i = new Intent("NEW_GESTURE");
-        i.putExtra("Key", "Supreet");
+        i.putExtra("Key", 0);
 
         sendBroadcast(i);
 
@@ -119,7 +119,7 @@ public class BLEService extends Service {
                 BluetoothDevice device = result.getDevice();
                 if (device.getName() == null) { return; }
                 if (device.getName().equals("buckle")) {    //TODO: Hardcoded name, change logic
-                    //Log.d(TAG, "Buckle found");
+                    Log.d(TAG, "Buckle found");
                     connect(device.getAddress());
                 }
             }
@@ -134,7 +134,7 @@ public class BLEService extends Service {
         // Previously connected device.  Try to reconnect.
         if (mBluetoothAddress != null && address.equals(mBluetoothAddress)
                 && mBluetoothGatt != null) {
-            //Log.d(TAG, "Trying to use an existing mBluetoothGatt for connection.");
+            Log.d(TAG, "Trying to use an existing mBluetoothGatt for connection.");
             if (mBluetoothGatt.connect()) {
                 return true;
             } else {
@@ -149,7 +149,7 @@ public class BLEService extends Service {
         // We want to directly connect to the device, so we are setting the autoConnect
         // parameter to false.
         mBluetoothGatt = device.connectGatt(this, true, mGattCallback);
-        //Log.d(TAG, "Trying to create a new connection.");
+        Log.d(TAG, "Trying to create a new connection.");
         mBluetoothAddress = address;
         return true;
     }
@@ -167,13 +167,13 @@ public class BLEService extends Service {
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             String intentAction;
             if (newState == BluetoothProfile.STATE_CONNECTED) {
-                //Log.i(TAG, "Connected to GATT server.");
+                Log.i(TAG, "Connected to GATT server.");
                 // Attempts to discover services after successful connection.
                 Log.i(TAG, "Attempting to start service discovery:" +
                        mBluetoothGatt.discoverServices());
-                mBluetoothGatt.discoverServices();
+                //mBluetoothGatt.discoverServices();
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
-                //Log.i(TAG, "Disconnected from GATT server.");
+                Log.i(TAG, "Disconnected from GATT server.");
             }
         }
 
@@ -183,9 +183,9 @@ public class BLEService extends Service {
                 for (BluetoothGattService service : gatt.getServices()) {
                     //Log.d(TAG, service.getUuid().toString());
                     if (service.getUuid().toString().equals(UUID.fromString(SERVICE_UUID).toString())) {
-                        //Log.d(TAG, "Service found");
+                        Log.d(TAG, "Service found");
                         for (BluetoothGattCharacteristic c : service.getCharacteristics()) {
-                            //Log.d(TAG, c.getUuid().toString());
+                            Log.d(TAG, c.getUuid().toString());
                         }
                         BluetoothGattCharacteristic characteristic = service.getCharacteristic(UUID.fromString(CHARACTERISTIC_UUID));
                         gatt.setCharacteristicNotification(characteristic, true);
