@@ -11,6 +11,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -45,8 +47,12 @@ public class MyApplicationActivity extends Activity {
         setTitle(R.string.app_name);
         setContentView(R.layout.activity_main);
 
+        getActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
+        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#26c7db")));
         textView = (TextView) findViewById(R.id.gesture);
         canvasView = (CanvasView) findViewById(R.id.canvasView);
+
+        textView.setText("");
 
         Log.d("Imperium", "onCreate");
         Intent gattServiceIntent = new Intent(this, BLEService.class);
