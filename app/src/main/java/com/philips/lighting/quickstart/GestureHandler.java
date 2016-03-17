@@ -27,17 +27,13 @@ public class GestureHandler {
 
     public static GestureHandler getInstance(Context context) {
         if (instance == null) {
-            Log.d("Imperium", "GestureHandler create new instance");
             instance = new GestureHandler(context);
         }
-        Log.d("Imperium", "GestureHandler return existing instance");
         return instance;
     }
 
     public void handleGesture(int gesture) {
-        Log.d("Imperium", "handleGesture");
         if (gesture == 6) {
-            Log.d("Imperium", "desperate Log");
             switchDevices();
         } else {
             controller.performDeviceAction(gesture);
@@ -45,7 +41,6 @@ public class GestureHandler {
     }
 
     private void switchDevices() {
-        Log.d("Imperium", String.valueOf(this.selectedDevice));
         switch (this.selectedDevice) {
             case PHONE:
                 this.selectedDevice = DeviceEnum.HUE;
@@ -54,7 +49,7 @@ public class GestureHandler {
                 this.selectedDevice = DeviceEnum.PHONE;
                 break;
         }
-        Toast.makeText(this.context, this.selectedDevice.toString(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this.context, this.selectedDevice.toString(), Toast.LENGTH_SHORT).show();
         controller.setDevice(this.selectedDevice.getDevice());
     }
 
