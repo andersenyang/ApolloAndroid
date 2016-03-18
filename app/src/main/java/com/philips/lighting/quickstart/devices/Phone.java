@@ -13,7 +13,7 @@ public class Phone extends Device {
 
     @Override
     public void performAction(int gesture) {
-        Log.d("Imperium", String.valueOf(gesture));
+        //Log.d("Imperium", String.valueOf(gesture));
         switch (gesture) {
             case 1:
                 changeVolume(2);
@@ -22,7 +22,7 @@ public class Phone extends Device {
                 changeVolume(-2);
                 break;
             case 3:
-                // Need to implement this; what do we want to do?
+                //toggleMute();
                 break;
         }
     }
@@ -31,11 +31,16 @@ public class Phone extends Device {
         AudioManager mgr = null;
 
         mgr = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
-        //int maxVolume = mgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-        //int minVolume = 0;
         int volume = mgr.getStreamVolume(AudioManager.STREAM_MUSIC);
 
         mgr.setStreamVolume(AudioManager.STREAM_MUSIC, (volume+volumeStep), AudioManager.FLAG_SHOW_UI);
+    }
+
+    public void toggleMute() {
+        AudioManager mgr = null;
+
+        mgr = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+        mgr.adjustVolume(mgr.ADJUST_TOGGLE_MUTE, AudioManager.FLAG_SHOW_UI);
     }
 
     public void setContext(Context context) {

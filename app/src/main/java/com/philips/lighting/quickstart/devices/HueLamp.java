@@ -12,12 +12,14 @@ import com.philips.lighting.model.PHLightState;
 
 public class HueLamp extends Device {
     private PHHueSDK phHueSDK;
+    private boolean brighter = true;
+
     private static final int MAX_HUE=65535;
     private static final int MAX_BRIGHTNESS=255;
     private static final int MAX_SATURATION=255;
-    private static final int HUE_LEVELS=15;
-    private static final int BRIGHTNESS_LEVELS=6;
-    private static final int SATURATION_LEVELS=6;
+    private static final int HUE_LEVELS=10;
+    private static final int BRIGHTNESS_LEVELS=3;
+    private static final int SATURATION_LEVELS=3;
 
     public HueLamp() {
         phHueSDK = phHueSDK.create();
@@ -28,14 +30,34 @@ public class HueLamp extends Device {
         Log.d("Imperium", "Hue called");
         switch (gesture) {
             case 1:
-                changeBrightness(true);
+                changeBrightness();
                 break;
             case 2:
-                changeLightColour();
+                toggleLightOnOff();
                 break;
             case 3:
                 colorLoop();
                 break;
+        }
+    }
+
+    private void toggleLightOnOff() {
+        PHBridge bridge = phHueSDK.getSelectedBridge();
+        PHBridgeResourcesCache cache = bridge.getResourceCache();
+
+        List<PHLight> lights = cache.getAllLights();
+
+        for(PHLight light : lights) {
+            PHLightState lightState = light.getLastKnownLightState();
+            PHLightState lightStateNew = new PHLightState();
+
+            if (lightState.isOn()) {
+                lightStateNew.setOn(false);
+            } else {
+                lightStateNew.setOn(true);
+            }
+
+            bridge.updateLightState(light, lightStateNew);
         }
     }
 
@@ -70,7 +92,7 @@ public class HueLamp extends Device {
         }
     }
 
-    private void changeBrightness(boolean brighter) {
+    private void changeBrightness() {
         PHBridge bridge = phHueSDK.getSelectedBridge();
         List<PHLight> lights = bridge.getResourceCache().getAllLights();
 
@@ -82,16 +104,17 @@ public class HueLamp extends Device {
             if (brighter) {
                 brightness = brightness + MAX_BRIGHTNESS/BRIGHTNESS_LEVELS;
                 if (brightness > MAX_BRIGHTNESS) {
-                    brightness = brightness - MAX_BRIGHTNESS;
+                    brightness = brightness - (2*MAX_BRIGHTNESS/BRIGHTNESS_LEVELS);
+                    brighter = false;
                 }
-            } else if (brightness > 0) {
+            } else {
                 brightness = brightness - MAX_BRIGHTNESS/BRIGHTNESS_LEVELS;
                 if (brightness < 0) {
-                    brightness = 0;
+                    brightness = brightness + (2*MAX_BRIGHTNESS/BRIGHTNESS_LEVELS);
+                    brighter = true;
                 }
             }
 
-            lightStateNew.setEffectMode(PHLight.PHLightEffectMode.EFFECT_NONE);
             lightStateNew.setBrightness(brightness);
             bridge.updateLightState(light, lightStateNew);
         }
@@ -103,8 +126,15 @@ public class HueLamp extends Device {
         List<PHLight> lights = bridge.getResourceCache().getAllLights();
 
         for (PHLight light: lights) {
+            PHLightState lightState = light.getLastKnownLightState();
             PHLightState lightStateNew = new PHLightState();
-            lightStateNew.setEffectMode(PHLight.PHLightEffectMode.EFFECT_COLORLOOP);
+
+            if (lightState.getEffectMode() == PHLight.PHLightEffectMode.EFFECT_NONE) {
+                lightStateNew.setEffectMode(PHLight.PHLightEffectMode.EFFECT_COLORLOOP);
+            } else {
+                lightStateNew.setEffectMode(PHLight.PHLightEffectMode.EFFECT_NONE);
+            }
+
             bridge.updateLightState(light, lightStateNew);
         }
     }
