@@ -4,15 +4,21 @@ import java.util.List;
 import java.util.Map;
 
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -65,6 +71,7 @@ public class MyApplicationActivity extends Activity {
         registerReceiver(gestureUpdated, new IntentFilter("NEW_GESTURE"));
         registerReceiver(drawCoordinates, new IntentFilter("COORDINATES"));
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
