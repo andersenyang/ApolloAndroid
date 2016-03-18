@@ -35,14 +35,14 @@ public class Phone extends Device {
 
         mgr.setStreamVolume(AudioManager.STREAM_MUSIC, (volume+volumeStep), AudioManager.FLAG_SHOW_UI);
     }
-
+/*
     public void toggleMute() {
         AudioManager mgr = null;
 
         mgr = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
         mgr.adjustVolume(mgr.ADJUST_TOGGLE_MUTE, AudioManager.FLAG_SHOW_UI);
     }
-
+*/
     public void setContext(Context context) {
         this.context = context;
     }

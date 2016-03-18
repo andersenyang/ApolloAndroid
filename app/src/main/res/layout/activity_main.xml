@@ -8,20 +8,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".PHMyApplicationActivity" >
 
-    <TextView
-        android:id="@+id/gesture"
-        android:text="Gesture"
-        android:layout_below="@+id/connectHueButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <com.philips.lighting.quickstart.CanvasView
         android:id="@+id/canvasView"
         android:layout_width="match_parent"
-        android:layout_height="588px"
-        android:layout_below="@+id/gesture"
+        android:layout_height="763px"
         android:background="@drawable/border"
         />
+
+    <TextView
+        android:id="@+id/gesture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:text="Phone"/>
 
 
 </RelativeLayout>

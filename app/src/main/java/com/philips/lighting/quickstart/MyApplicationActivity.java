@@ -116,7 +116,7 @@ public class MyApplicationActivity extends Activity {
             int gesture = intent.getExtras().getInt("Key");
             Log.d(TAG, "GESTURE IS");
             Log.d(TAG, String.valueOf(gesture));
-            textView.setText(String.valueOf(gesture));
+            //textView.setText(String.valueOf(gesture));
         }
     };
 

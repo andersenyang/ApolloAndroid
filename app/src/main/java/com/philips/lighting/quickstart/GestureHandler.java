@@ -7,6 +7,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.RemoteViews;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.util.Log;
 
@@ -59,7 +60,9 @@ public class GestureHandler {
         final Activity activity = (Activity) this.context;
         activity.runOnUiThread(new Runnable() {
             public void run() {
-                Toast.makeText(activity, self.selectedDevice.toString(), Toast.LENGTH_SHORT).show();
+                TextView textView = (TextView) activity.findViewById(R.id.gesture);
+                textView.setText(self.selectedDevice.toString().toLowerCase());
+                //Toast.makeText(activity, self.selectedDevice.toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }

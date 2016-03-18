@@ -187,12 +187,15 @@ public class BLEService extends Service {
                         for (BluetoothGattCharacteristic c : service.getCharacteristics()) {
                             Log.d(TAG, c.getUuid().toString());
                         }
+
                         BluetoothGattCharacteristic characteristic = service.getCharacteristic(UUID.fromString(CHARACTERISTIC_UUID));
-                        gatt.setCharacteristicNotification(characteristic, true);
-                        BluetoothGattDescriptor descriptor = characteristic.getDescriptor(UUID.fromString(DESCRIPTOR_UUID));
-                        descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-                        gatt.writeDescriptor(descriptor);
-                        Log.d(TAG, String.valueOf(gatt.readCharacteristic(characteristic)));
+                        if (characteristic != null) {
+                            gatt.setCharacteristicNotification(characteristic, true);
+                            BluetoothGattDescriptor descriptor = characteristic.getDescriptor(UUID.fromString(DESCRIPTOR_UUID));
+                            descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+                            gatt.writeDescriptor(descriptor);
+                            Log.d(TAG, String.valueOf(gatt.readCharacteristic(characteristic)));
+                        }
                     }
                 }
             } else {
@@ -200,22 +203,11 @@ public class BLEService extends Service {
             }
         }
 
-        @Override
-        public void onCharacteristicRead(BluetoothGatt gatt,
-                                         BluetoothGattCharacteristic characteristic,
-                                         int status) {
-            //Log.d(TAG, "onCharacteristicRead");
-            Toast.makeText(getApplicationContext(), "hi" , Toast.LENGTH_LONG).show();
-            if (status == BluetoothGatt.GATT_SUCCESS) {
-                //Log.d(TAG, characteristic.getStringValue(0));
-            }
-        }
 
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt,
                                             BluetoothGattCharacteristic characteristic) {
 
-            //Log.d(TAG, "Characteristic Changed");
             byte[] arr = characteristic.getValue();
             int arr_length = arr.length;
 
@@ -240,28 +232,11 @@ public class BLEService extends Service {
                     }
                     str = new StringBuilder(str).reverse().toString();
                     builder.append(str);
-                    //Log.d(TAG, str);
                 }
                 String s = builder.toString();
                 Intent i = new Intent("COORDINATES");
                 i.putExtra("Key", s);
                 sendBroadcast(i);
-/*
-                ./main
-                0 0 0 0 0 0 0 0
-                0 0 0 0 0 0 0 0
-                0 0 0 0 1 1 1 0
-                1 0 0 0 0 1 1 1
-                1 1 1 0 0 0 1 1
-                1 1 1 1 0 0 0 0
-               */
-
-                // 0 0 0 0 0 0 0 0 0
-                // 0 0 0 0 0 0 0 0 0
-                // 0 0 1 1 1 0 1 0 0
-                // 0 0 1 1 1 1 1 1 0
-                // 0 0 1 1 1 1 1 1 0
-                // 0 0 0
             }
 
         }

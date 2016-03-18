@@ -34,7 +34,7 @@ public class CanvasView extends View {
         this.viewWidth = 0;
         this.viewHeight = 0;
         this.blockWidth = 0;
-        this.size = 45;
+        this.size = 48;
     }
 
     @Override
@@ -43,8 +43,8 @@ public class CanvasView extends View {
         paint.setColor(Color.MAGENTA);
         backgroundPaint.setColor(Color.LTGRAY);
         for (int i = 0; i < this.size; i++) {
-            int col = i % 9 + 1;
-            int row = i /9 + 1;
+            int col = i % 8 + 1;
+            int row = i / 8 + 1;
             int x = col * this.blockWidth;
             int y = row * this.blockWidth;
             canvas.drawCircle(x, y, 10, this.backgroundPaint);
@@ -64,8 +64,8 @@ public class CanvasView extends View {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
         this.viewWidth = this.getWidth();
-        this.blockWidth = this.viewWidth / 10;
-        this.viewHeight = this.blockWidth * 6;
+        this.blockWidth = this.viewWidth / 9;
+        this.viewHeight = this.blockWidth * 7;
         invalidate();
     }
 
@@ -75,8 +75,8 @@ public class CanvasView extends View {
     }
     public void setPoint(int x) {
         //Log.d("Imperium", String.valueOf(x));
-        int col = x % 9 + 1;
-        int row = x /9 + 1;
+        int col = x % 8 + 1;
+        int row = x / 8 + 1;
         this.x_arr.add(col * this.blockWidth);
         this.y_arr.add(row * this.blockWidth);
         //Log.d("Imperium", String.valueOf(col * this.blockWidth));
